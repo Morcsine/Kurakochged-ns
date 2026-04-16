@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Dashboard - xdarkkura</title>
+    <style>
+        body { margin: 0; background-color: #0e0e10; color: white; font-family: sans-serif; height: 100vh; display: grid; grid-template-rows: 50px 1fr; grid-template-columns: 1fr 350px; gap: 10px; padding: 10px; box-sizing: border-box; }
+        header { grid-column: 1 / span 2; background: #18181b; display: flex; align-items: center; padding: 0 15px; border-radius: 5px; border: 1px solid #303032; font-size: 0.9rem; color: #adadb8; }
+        #autoplay-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(14,14,16,0.98); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
+        #start-btn { padding: 20px 40px; font-size: 1.2rem; background: #9146ff; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        #start-btn:hover { background: #772ce8; transform: scale(1.05); }
+        .main-content { display: grid; grid-template-rows: 150px 1fr; gap: 10px; }
+        .top-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .widget-box, .stream-preview, .chat-container { background: #18181b; border-radius: 5px; border: 1px solid #303032; overflow: hidden; }
+        iframe { width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body>
+    <div id="autoplay-overlay">
+        <button id="start-btn">ACTIVATE STREAM DASHBOARD</button>
+        <p style="color: #666; margin-top: 10px;">Click to enable audio & streams</p>
+    </div>
+
+    <header>Dashboard for xdarkkura</header>
+
+    <div class="main-content">
+        <div class="top-row">
+            <div class="widget-box"><iframe id="labels-frame" data-src="PASTE_YOUR_STREAMELEMENTS_LABELS_URL_HERE"></iframe></div>
+            <div class="widget-box"><iframe id="alerts-frame" data-src="PASTE_YOUR_STREAMELEMENTS_ALERTS_URL_HERE"></iframe></div>
+        </div>
+        <div class="stream-preview">
+            <iframe id="stream-frame" data-src="https://player.twitch.tv/?channel=xdarkkura&parent=yourusername.github.io&muted=true" allow="autoplay; fullscreen"></iframe>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <iframe id="chat-frame" data-src="https://www.twitch.tv/embed/xdarkkura/chat?parent=yourusername.github.io&darkpopout"></iframe>
+    </div>
+
+    <script>
+        document.getElementById('start-btn').addEventListener('click', function() {
+            document.getElementById('autoplay-overlay').style.display = 'none';
+            document.querySelectorAll('iframe').forEach(f => {
+                if(f.getAttribute('data-src')) f.src = f.getAttribute('data-src');
+            });
+        });
+    </script>
+</body>
+</html>
